@@ -13,25 +13,17 @@ class LeerlingModel
     {
 
         $sql = "SELECT
-                       EXAM.Voornaam
-                      ,EXAM.Tussenvoegsel
-                      ,EXAM.Achternaam
-                      ,CONCAT(EXAM.Voornaam, ' ', EXAM.Tussenvoegsel, ' ', EXAM.Achternaam) AS naam
-                      ,EXAN.Datum
-                      ,EXAN.Rijbewijscategorie
-                      ,EXAN.Rijschool
-                      ,EXAN.Stad
-                      ,EXAN.Uitslag
-        
-                FROM Examinator AS EXAM
-                
-                INNER JOIN ExamenPerExaminator AS EXPE
-                
-                        ON EXPE.ExaminatorId = EXAM.Id
-
-                INNER JOIN Examen AS EXAN
-
-                        ON EXAN.Id = EXPE.ExamenId";
+            LEE.Voornaam,
+            LEE.mobiel,
+            LSP.Pakketnaam,
+            LSP.AantalLessen,
+            LSP.Prijs,
+            LPP.StartDatumRijlessen,
+            LPP.DatumRijbewijsBehaald
+        FROM Leerling AS LEE
+        INNER JOIN LesPakket AS LSP 
+        ON LSP.LespakketId = LEE.Id
+        INNER JOIN LeerlingPerLesPakket AS LPP ON LPP.Id = LSP.LeerlingPerLesPakketId";
 
         $this->db->query($sql);
 
