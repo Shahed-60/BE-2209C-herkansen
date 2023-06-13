@@ -22,8 +22,9 @@ class LeerlingModel
             LPP.DatumRijbewijsBehaald
         FROM Leerling AS LEE
         INNER JOIN LesPakket AS LSP 
-        ON LSP.LespakketId = LEE.Id
-        INNER JOIN LeerlingPerLesPakket AS LPP ON LPP.Id = LSP.LeerlingPerLesPakketId";
+        ON LSP.Id = LEE.Id
+        INNER JOIN LeerlingPerLesPakket AS LPP ON LPP.Id = LSP.Id
+        ORDER BY StartDatumRijlessen ASC";
 
         $this->db->query($sql);
 

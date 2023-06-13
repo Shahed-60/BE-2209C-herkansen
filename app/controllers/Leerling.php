@@ -22,16 +22,17 @@ class Leerling extends BaseController
          */
         $tableRows = '';
 
+
         foreach ($Leerlingen as $Leerling) {
 
             $tableRows .=  "<tr>
-                                <td>$Leerling->naam</td>
+                                <td>$Leerling->Voornaam</td>
                                 <td>$Leerling->mobiel</td>
-                                <td>$Leerling->pakketnaam</td>
+                                <td>$Leerling->Pakketnaam</td>
                                 <td>$Leerling->AantalLessen</td>
                                 <td>$Leerling->Prijs</td>
-                                <td>$Leerling->Startdatum</td>
-                                <td>$Leerling->DatumRijbewijsbehaald</td>
+                                <td>$Leerling->StartDatumRijlessen</td>
+                                <td>$Leerling->DatumRijbewijsBehaald</td>
                             </tr>";
         }
         /**
