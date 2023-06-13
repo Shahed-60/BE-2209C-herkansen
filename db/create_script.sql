@@ -1,5 +1,5 @@
 -- Step: 01
--- Goal: Create a new database mvc-2209c-P4
+-- Goal: Create a new database mvc-2209c-herkansen
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
@@ -7,13 +7,13 @@
 -- **********************************************************************************/
 
 -- Check if the database exists
-DROP DATABASE IF EXISTS `Mvc-2209c-P4-toets`;
+DROP DATABASE IF EXISTS `mvc-2209c-herkansen`;
 
 -- Create a new Database
-CREATE DATABASE IF NOT EXISTS `Mvc-2209c-P4-toets`;
+CREATE DATABASE IF NOT EXISTS `mvc-2209c-herkansen`;
 
 -- Use database Mvc-2209c-P4
-Use `Mvc-2209c-P4-toets`;
+Use `mvc-2209c-herkansen`;
 
 -- Step: 02
 -- Goal: Create a new table Examen
