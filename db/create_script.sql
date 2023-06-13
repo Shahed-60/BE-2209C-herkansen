@@ -23,56 +23,49 @@ Use `mvc-2209c-herkansen`;
 -- 01            14-04-2023      Shahed Amer                    New
 -- **********************************************************************************
 
--- Drop table Instructeur
-DROP TABLE IF EXISTS Examen;
+-- Drop table Lespakket
+DROP TABLE IF EXISTS Lespakket;
 
-CREATE TABLE IF NOT EXISTS Examen
+CREATE TABLE IF NOT EXISTS Lespakket
 (
-    Id              TINYINT         UNSIGNED        NOT NULL    AUTO_INCREMENT
-   ,StudentId        INT                         NOT NULL
-   ,Rijschool       VARCHAR(50)                     NOT NULL
-   ,Stad            VARCHAR(50)                     NOT NULL
-   ,Rijbewijscategorie VARCHAR(5)                   NOT NULL
-   ,Datum           DATE                            NOT NULL
-   ,Uitslag         VARCHAR(10)                     NOT NULL
-   ,IsActief        BIT                             NOT NULL    DEFAULT 1
-   ,Opmerkingen     VARCHAR(250)                        NULL    DEFAULT NULL
-   ,DatumAangemaakt DateTime(6)                     NOT NULL
-   ,DatumGewijzigd  DateTime(6)                     NOT NULL
+    Id                   TINYINT         UNSIGNED     NOT NULL    AUTO_INCREMENT
+   ,PakketNaam          VARCHAR(50)                  NOT NULL
+   ,AantalLessen         INT(10)                      NOT NULL
+   ,Rijbewijscategorie   VARCHAR(5)       NOT NULL
+   ,Prijs                VARCHAR(10)                      NOT NULL
+   ,IsActief             BIT                             NOT NULL    DEFAULT 1
+   ,Opmerkingen          VARCHAR(250)                        NULL    DEFAULT NULL
+   ,DatumAangemaakt      DateTime(6)                     NOT NULL
+   ,DatumGewijzigd       DateTime(6)                     NOT NULL
 
-   ,CONSTRAINT      PK_Examen_Id   PRIMARY KEY CLUSTERED(Id)
+   ,CONSTRAINT      PK_Lespakket_Id   PRIMARY KEY CLUSTERED(Id)
 ) ENGINE=InnoDB;
 
 
 -- Step: 03
--- Goal: Fill table Examen with data
+-- Goal: Fill table Lespakket with data
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
 -- 01            02-06-2023      Shahed Amer                    New
 -- **********************************************************************************/
 
-INSERT INTO Examen
+INSERT INTO Lespakket
 (
-    StudentId
-   ,Rijschool       
-   ,Stad
-   ,Rijbewijscategorie 
-   ,Datum           
-   ,Uitslag  
+    PakketNaam
+   ,AantalLessen       
+   ,Rijbewijscategorie
+   ,Prijs  
    ,IsActief
    ,Opmerkingen
    ,DatumAangemaakt
    ,DatumGewijzigd
 )
 VALUES
-     ('100234', 'VolGasVooruit', 'Rotterdam', 'B', '2023-04-03', 'Geslaagd', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('123432', 'InZijnVierDoorDeBocht', 'Sliedrecht', 'C', '2023-03-01', 'Geslaagd', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('103234', 'LinsomRechtsom', 'Dordrecht', 'D', '2023-05-15', 'Geslaagd', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('106452', 'OpDeVluchtStrook', 'Zwijndrecht', 'AM', '2023-05-08', 'Gezakt', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('104546', 'RechtDoorEnGaan', 'Rotterdam', 'B', '2023-04-17', 'Gezakt', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('100333', 'AltijdGeslaagd', 'Dordrecht', 'B', '2023-05-12', 'Geslaagd', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('124444', 'RijlesVoorJou', 'Rotterdam', 'B', '2023-04-12', 'Geslaagd', 1, NULL, SYSDATE(6), SYSDATE(6));
+     ('Personenauto Extra', '40', 'B', '2700', 1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('Vrachtwagen Subliem', '60', 'C', '5400', 1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('Bus Extraordinaire', '80', 'D', '7300', 1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('Bromfiets', '10', 'AM', '230', 1, NULL, SYSDATE(6), SYSDATE(6));
 
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,17 +73,17 @@ VALUES
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Step: 06
--- Goal: Create a new table Examinator
+-- Goal: Create a new table Leerling
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
 -- 01            14-04-2023      Shahed Amer                    New
 -- **********************************************************************************/
 
--- Drop table Examinator
-DROP TABLE IF EXISTS Examinator;
+-- Drop table Leerling
+DROP TABLE IF EXISTS Leerling;
 
-CREATE TABLE IF NOT EXISTS Examinator
+CREATE TABLE IF NOT EXISTS Leerling
 (
     Id                       TINYINT         UNSIGNED            NOT NULL    AUTO_INCREMENT
    ,Voornaam                 VARCHAR(50)                         NOT NULL
@@ -102,7 +95,7 @@ CREATE TABLE IF NOT EXISTS Examinator
    ,DatumAangemaakt          DateTime(6)                        NOT NULL
    ,DatumGewijzigd           DateTime(6)                        NOT NULL
 
-   ,CONSTRAINT      PK_Examinator_Id   PRIMARY KEY CLUSTERED(Id)
+   ,CONSTRAINT      PK_Leerling_Id   PRIMARY KEY CLUSTERED(Id)
    
 
 ) ENGINE=InnoDB;
@@ -116,7 +109,7 @@ CREATE TABLE IF NOT EXISTS Examinator
 -- 01            14-04-2023      Shahed Amer                    New
 -- **********************************************************************************/
 
-INSERT INTO Examinator
+INSERT INTO Leerling
 (
      Voornaam                 
     ,Tussenvoegsel            
@@ -128,62 +121,65 @@ INSERT INTO Examinator
     ,DatumGewijzigd
 )
 VALUES 
-('Manuel', 'van', 'Meekeren', '06-28493823', 1, NULL, SYSDATE(6), SYSDATE(6)),
-('Lissette', 'den', 'Dongen', '06-24383299', 1, NULL, SYSDATE(6), SYSDATE(6)),
-('Jurswailly', '', 'Luciano', '06-48293846', 1, NULL, SYSDATE(6), SYSDATE(6)),
-('Naswha', '', 'Salawi', '06-34291219', 1, NULL, SYSDATE(6), SYSDATE(6));
+('Bas', 'De', 'Bakker', '06-28493823', 1, NULL, SYSDATE(6), SYSDATE(6)),
+('Terence', '', 'Draaijer', '06-39398734', 1, NULL, SYSDATE(6), SYSDATE(6)),
+('Samuel', '', 'Werachter', '06-24383291', 1, NULL, SYSDATE(6), SYSDATE(6)),
+('Sharida', '', 'Tetehuka', '06-48293823', 1, NULL, SYSDATE(6), SYSDATE(6)),
+('Fatma', '', 'Yilmaz', '06-34291234', 1, NULL, SYSDATE(6), SYSDATE(6));
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Step: 04
--- Goal: Create a new table ExamenPerExaminator
+-- Goal: Create a new table LeerlingPerLesPakket
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
 -- 01            14-04-2023      Shahed Amer                    New
 -- **********************************************************************************/
 
--- Drop table ExamenPerExaminator
-DROP TABLE IF EXISTS ExamenPerExaminator;
+-- Drop table LeerlingPerLesPakket
+DROP TABLE IF EXISTS LeerlingPerLesPakket;
 
-CREATE TABLE IF NOT EXISTS ExamenPerExaminator
+CREATE TABLE IF NOT EXISTS LeerlingPerLesPakket
 (
     Id                      TINYINT         UNSIGNED        NOT NULL    AUTO_INCREMENT
-   ,ExamenId                TINYINT          UNSIGNED               NOT NULL
-   ,ExaminatorId            TINYINT             UNSIGNED            NOT NULL
+   ,LespakketId                TINYINT          UNSIGNED               NOT NULL
+   ,LeerlingId            TINYINT             UNSIGNED            NOT NULL
+   ,StartDatumRijlessen     DATE                                NOT NULL
+   ,DatumRijbewijsBehaald   VARCHAR(20)                                NOT NULL
    ,IsActief                BIT                             NOT NULL    DEFAULT 1
    ,Opmerkingen             VARCHAR(250)                        NULL    DEFAULT NULL
    ,DatumAangemaakt         DateTime(6)                     NOT NULL
    ,DatumGewijzigd          DateTime(6)                     NOT NULL
 
-   ,CONSTRAINT      PK_ExamenPerExaminator_Id   PRIMARY KEY CLUSTERED(Id)
-   ,CONSTRAINT      FK_ExamenPerExaminator_ExamenId_Examen_Id FOREIGN KEY (ExamenId) REFERENCES Examen(Id)
-   ,CONSTRAINT      FK_ExamenPerExaminator_ExaminatorId_Examinator_Id FOREIGN KEY (ExaminatorId) REFERENCES Examinator(Id)
+   ,CONSTRAINT      PK_LeerlingPerLesPakket_Id   PRIMARY KEY CLUSTERED(Id)
+   ,CONSTRAINT      FK_LeerlingPerLesPakket_LespakketId_Lespakket_Id FOREIGN KEY (LespakketId) REFERENCES Lespakket(Id)
+   ,CONSTRAINT      FK_LeerlingPerLesPakket_LeerlingId_Leerling_Id FOREIGN KEY (LeerlingId) REFERENCES Leerling(Id)
 
 ) ENGINE=InnoDB;
 
 -- Step: 05
--- Goal: Fill table ExamenPerExaminator with data
+-- Goal: Fill table LeerlingPerLesPakket with data
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
 -- 01            14-04-2023      Shahed Amer                    New
 -- **********************************************************************************
 
-INSERT INTO ExamenPerExaminator
+INSERT INTO LeerlingPerLesPakket
 (
-    ExamenId
-    ,ExaminatorId 
+    LespakketId
+    ,LeerlingId
+    ,StartDatumRijlessen
+    ,DatumRijbewijsBehaald
     ,IsActief
     ,Opmerkingen
     ,DatumAangemaakt
     ,DatumGewijzigd
 )
 VALUES
-     ('1', '3', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('3', '3', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('2', '2', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('4', '1', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('7', '3', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('6', '2', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('5', '4', 1, NULL, SYSDATE(6), SYSDATE(6));
-
+     ('1', '5','2023-05-23' ,'NULL',1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('4', '1','2022-06-03' ,'05-08-2022',1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('1', '1','2023-06-02' ,'NULL',1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('3', '4', '2023-01-01','NULL',1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('1', '2', '2022-11-30','23-05-2023',1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('2', '3', '2022-06-06','06-06-2023',1, NULL, SYSDATE(6), SYSDATE(6));
